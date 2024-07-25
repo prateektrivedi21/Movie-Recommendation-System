@@ -21,8 +21,9 @@ h1, h2, h3, h4, h5, h6{
     text-shadow: #000000 0px 0px 13px;
 }
 
-.movie-font-details{
+.p{
     color:#ffffff;
+    font-weight: bold;
 }
 
 .selected-movie-poster{
