@@ -60,7 +60,7 @@ def cast_member_html(cast):
     <div class='cast-member'>
         <img src='{cast["profile_path"]}' class='cast-photo'/>
         <div class='cast-details'>
-            <h3 style='color: #FFAE42; font-size: 17px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;' title='{cast["character"]}'>
+            <h3 style='color: #FFAE42; font-size: 19px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;' title='{cast["character"]}'>
                 {cast["character"]}
             </h3>
         </div>
@@ -232,7 +232,7 @@ if st.button('Recommend'):
 
     st.markdown('<h1 class="subheader">Top Cast of the Movie</h1>', unsafe_allow_html=True)
     st.markdown('<p class="recommend">(Expand to uncover hidden gems about your favorite stars!)</p>',unsafe_allow_html=True)
-    num_col = 6
+    num_col = 5
     cast_cols = st.columns(num_col)
     placeholder_image_url = "https://via.placeholder.com/500x750?text=No+Image"
     for idx, cast in enumerate(cast_details):  # Access cast details correctly
