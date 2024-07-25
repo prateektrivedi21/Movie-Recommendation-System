@@ -104,7 +104,7 @@ add_bg_from_local('images/14.jpeg')
 
 # Adding the main header at the top of the page
 st.markdown('<h1 class="header">Movie Recommender System</h1>', unsafe_allow_html=True)
-movies_dict = pickle.load(open('movie_dict.pkl', 'rb'))
+movies_dict = pickle.load(open('assets/movie_dict.pkl', 'rb'))
 movies = pd.DataFrame(movies_dict)
 similarity = pickle.load(open('similarity.pkl', 'rb'))
 movie_list = movies['title'].values
