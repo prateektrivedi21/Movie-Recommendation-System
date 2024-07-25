@@ -151,7 +151,7 @@ div.stButton > button {
     margin: 10px 20px;
 }
 
-.movie_font_details{
+.movie_font_details, #overview, .expander{
     color: #ffffff;
     font-weight: bold;
 }
