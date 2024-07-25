@@ -179,14 +179,14 @@ if st.button('Recommend'):
             .stSelectbox > div > div {
                 width: 90%;
             }
-            .movie-details img {
-                width: 100%;
-            }
             .movie_font_details {
                 font-size: 16px;
             }
             .subheader {
-                font-size: 24px;
+                font-size: 28px;
+            }
+            .movie-details{
+                font-size: 30px;
             }
             .recommend{
                 font-size: 18px;
