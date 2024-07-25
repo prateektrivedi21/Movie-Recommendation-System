@@ -28,7 +28,7 @@ def fetch_movie_cast(movie_id):
     cast = data['cast']
     crew = data['crew']
     cast_details = []
-    for member in cast[:12]:  # Limit to top 12 cast members
+    for member in cast[:10]:  # Limit to top 10 cast members
         cast_details.append({
             'name': member['name'],
             'character': member['character'],  # Include character role
@@ -60,7 +60,7 @@ def cast_member_html(cast):
     <div class='cast-member'>
         <img src='{cast["profile_path"]}' class='cast-photo'/>
         <div class='cast-details'>
-            <h3 style='color: #FFAE42; font-size: 19px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;' title='{cast["character"]}'>
+            <h3 class='cast-text' title='{cast["character"]}'>
                 {cast["character"]}
             </h3>
         </div>
@@ -166,7 +166,7 @@ if st.button('Recommend'):
         }
 
         @media (max-width: 768px) {
-            .recommended-movie, .cast-member, .selected-movie-poster {
+            .recommended-movie, .cast-member, .selected-movie-poster{
                 margin: 10px;
                 padding: 10px.
             }
