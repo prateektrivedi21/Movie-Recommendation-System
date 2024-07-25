@@ -9,7 +9,7 @@ def fetch_poster(movie_id):
     url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key=31b4d2af5d76969f2c5824937e980e38&language=en-US"
     data = requests.get(url).json()
     poster_path = data.get('poster_path')
-    if poster_path:
+    if (poster_path):
         full_path = "https://image.tmdb.org/t/p/w500/" + poster_path
     else:
         full_path = "https://via.placeholder.com/500x750?text=No+Image"
@@ -104,7 +104,7 @@ add_bg_from_local('images/14.jpeg')
 
 # Adding the main header at the top of the page
 st.markdown('<h1 class="header">Movie Recommender System</h1>', unsafe_allow_html=True)
-movies_dict = pickle.load(open('assets/movie_dict.pkl', 'rb'))
+movies_dict = pickle.load(open('movie_dict.pkl', 'rb'))
 movies = pd.DataFrame(movies_dict)
 similarity = pickle.load(open('similarity.pkl', 'rb'))
 movie_list = movies['title'].values
@@ -168,14 +168,11 @@ if st.button('Recommend'):
         @media (max-width: 768px) {
             .recommended-movie, .cast-member, .selected-movie-poster{
                 margin: 10px;
-                padding: 10px.
+                padding: 10px;
             }
-            .movie_name {
-                font-size: 14px.
-            }
-            .cast-photo, .movie-poster {
-                max-width: 100px.
-                height: auto.
+            .cast-photo, .movie-poster, .scrollable-text {
+                max-width: 100px;
+                height: auto;
             }
         }
 
@@ -187,13 +184,16 @@ if st.button('Recommend'):
                 width: 100%;
             }
             .movie_font_details {
-                font-size: 12px;
+                font-size: 16px;
             }
-            .t-header, .subheader {
+            .t-header{
+                font-size: 20px;
+            } 
+            .subheader {
                 font-size: 18px;
             }
             .cast-info div {
-                max-width: 100%.
+                max-width: 100%;
             }
         }
         </style>
@@ -248,7 +248,7 @@ if st.button('Recommend'):
                 }),
                 unsafe_allow_html=True
             )
-            with st.expander(cast["name"]):
+            with st.expander(f"{cast['name']}"):
                 cast_info = fetch_cast_details(cast['id'])
                 st.markdown(
                     f"""
