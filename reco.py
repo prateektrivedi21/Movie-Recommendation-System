@@ -185,7 +185,10 @@ if st.button('Recommend'):
             .movie_font_details {
                 font-size: 16px;
             }
-            .t-header, .subheader {
+            .subheader {
+                font-size: 20px;
+            }
+            .recommend{
                 font-size: 18px;
             }
             .cast-info div {
