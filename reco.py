@@ -200,7 +200,7 @@ if st.button('Recommend'):
     movie_details = fetch_movie_details(movie_id)
     cast_details, director = fetch_movie_cast(movie_id)
 
-    st.markdown(f"<h1 class='movie_font_details' id="top-name">{movie_details['title']}</h1>",
+    st.markdown(f"<h1 class='movie_font_details' id='top-name'>{movie_details['title']}</h1>",
                 unsafe_allow_html=True)
     col1, col2 = st.columns([1, 4], gap="medium")
     with col1:
