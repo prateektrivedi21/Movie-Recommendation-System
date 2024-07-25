@@ -21,11 +21,6 @@ h1, h2, h3, h4, h5, h6{
     text-shadow: #000000 0px 0px 13px;
 }
 
-.p{
-    color:#ffffff;
-    font-weight: bold;
-}
-
 .selected-movie-poster{
     -webkit-box-shadow: 0px 1px 15px 4px rgba(250,250,250,1);
     -moz-box-shadow: 0px 1px 15px 4px rgba(250,250,250,1);
@@ -159,7 +154,6 @@ div.stButton > button {
     text-align : center;
     text-shadow: #000000 0px 0px 13px;
     color: #ffffff;
-    font-weight: bold;
 }
 
 .footer{
