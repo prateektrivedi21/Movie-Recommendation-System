@@ -155,6 +155,8 @@ div.stButton > button {
     font-size: 18px;
     text-align : center;
     text-shadow: #000000 0px 0px 13px;
+    color: #ffffff;
+    font-weight: bold;
 }
 
 .footer{
