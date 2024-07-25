@@ -161,7 +161,7 @@ if st.button('Recommend'):
             -moz-box-shadow: 0px 1px 15px 4px rgba(250,250,250,1);
             box-shadow: 0px 1px 15px 4px rgba(250,250,250,1); 
         }
-        .t-header:hover, .subheader:hover, .recommend:hover, p:hover{
+        .t-header:hover, .subheader:hover, .recommend:hover, p:hover, .expander-content{
             color : #FFAE42;
         }
 
@@ -182,7 +182,7 @@ if st.button('Recommend'):
             .movie_font_details {
                 font-size: 16px;
             }
-            .subheader, #top-name {
+            .subheader, #top-name, .expander-content {
                 font-size: 26px;
             }
             .recommend{
@@ -244,7 +244,7 @@ if st.button('Recommend'):
                 }),
                 unsafe_allow_html=True
             )
-            with st.expander(f"{cast['name']}"):
+            with st.expander(cast['name']):
                 cast_info = fetch_cast_details(cast['id'])
                 st.markdown(
                     f"""
