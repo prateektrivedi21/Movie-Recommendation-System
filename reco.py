@@ -248,7 +248,7 @@ if st.button('Recommend'):
                 cast_info = fetch_cast_details(cast['id'])
                 st.markdown(
                     f"""
-                    <div class='cast-info'>
+                    <div class='cast-info expander-content'>
                         <div>
                             <h3>{cast_info['name']}</h3>
                             <p><b>Birthday:</b> {cast_info['birthday']}</p>
