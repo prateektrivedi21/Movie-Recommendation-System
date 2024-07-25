@@ -46,9 +46,8 @@ h1, h2, h3, h4, h5, h6{
     background: #ffffff;
     padding-top: 1px;
     height: 110px;
-    /*max-height: 58px;
     overflow-y: auto;
-    white-space: nowrap;*/
+    white-space: nowrap;
 }
 
 .movie-text{
