@@ -182,11 +182,8 @@ if st.button('Recommend'):
             .movie_font_details {
                 font-size: 16px;
             }
-            .subheader {
-                font-size: 28px;
-            }
-            .movie-details{
-                font-size: 30px;
+            .subheader, #top-name {
+                font-size: 26px;
             }
             .recommend{
                 font-size: 18px;
@@ -203,7 +200,7 @@ if st.button('Recommend'):
     movie_details = fetch_movie_details(movie_id)
     cast_details, director = fetch_movie_cast(movie_id)
 
-    st.markdown(f"<div class='movie-details'><h1 class='movie_font_details'>{movie_details['title']}</h1></div>",
+    st.markdown(f"<h1 class='movie_font_details' id="top-name">{movie_details['title']}</h1>",
                 unsafe_allow_html=True)
     col1, col2 = st.columns([1, 4], gap="medium")
     with col1:
