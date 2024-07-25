@@ -161,7 +161,7 @@ if st.button('Recommend'):
             -moz-box-shadow: 0px 1px 15px 4px rgba(250,250,250,1);
             box-shadow: 0px 1px 15px 4px rgba(250,250,250,1); 
         }
-        .t-header:hover, .subheader:hover, .recommend:hover, p:hover, .expander-content:hover {
+        .t-header:hover, .subheader:hover, .recommend:hover, p:hover, .expander-content:hover h3{
             color : #FFAE42;
         }
 
