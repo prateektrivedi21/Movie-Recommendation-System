@@ -151,6 +151,10 @@ div.stButton > button {
     margin: 10px 20px;
 }
 
+.movie_font_details{
+    color: #ffffff;
+    font-weight: bold;
+}
 .recommend{
     font-size: 18px;
     text-align : center;
