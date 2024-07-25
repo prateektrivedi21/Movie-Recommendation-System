@@ -36,13 +36,13 @@ h1, h2, h3, h4, h5, h6{
 .recommended-movie{
     box-shadow: 0px 8px 12px 4px rgba(255, 255, 255, 0.8);
     border: 2px solid #ffffff;
-    margin: 20px 20px 3px;
+    margin: 20px 20px 2px;
     text-align: center;
 }
 
 .scrollable-text{
     box-shadow: 0px 8px 15px 4px rgba(255, 255, 255, 0.8);
-    margin: 3px 20px 25px;
+    margin: 2px 20px 25px;
     background: #ffffff;
     padding-top: 1px;
     height: 110px;
@@ -123,16 +123,25 @@ div.stButton > button {
 }
 
 .cast-photo{
+    border: 1px solid #ffffff;
     width: 100%;
     height: auto;
 }
 .cast-details h3 {
+    border: 1px solid #ffffff;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 100%;
 }
-
+.cast-text{
+    color: #FFAE42;
+    font-size: 19px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 .cast-member{
     box-shadow: 0px 8px 15px 4px rgba(255, 255, 255, 0.8);
     margin: 10px 20px;
