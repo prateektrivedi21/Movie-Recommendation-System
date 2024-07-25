@@ -142,6 +142,9 @@ div.stButton > button {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+.expander-content {
+    color: #ffffff; 
+}
 .cast-member{
     box-shadow: 0px 8px 15px 4px rgba(255, 255, 255, 0.8);
     margin: 10px 20px;
