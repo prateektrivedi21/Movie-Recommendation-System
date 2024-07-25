@@ -1,0 +1,152 @@
+/* Centering headers and subheaders */
+h1, h2, h3, h4, h5, h6{
+    text-align: center;
+}
+
+/* Header */
+.header {
+    font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    width: 100%;
+    color: #e50914;
+    text-align: center;
+    font-weight: bold;
+    margin: 5px 0px 25px;
+}
+
+.subheader {
+    font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #ffffff;
+    font-weight: bold;
+    margin-top: 30px;
+    text-shadow: #000000 0px 0px 13px;
+}
+
+.selected-movie-poster{
+    -webkit-box-shadow: 0px 1px 15px 4px rgba(250,250,250,1);
+    -moz-box-shadow: 0px 1px 15px 4px rgba(250,250,250,1);
+    box-shadow: 0px 1px 15px 4px rgba(250,250,250,1);
+    border : border: 2px solid #ffffff;
+    border-radius : 10px;
+    height : 400px;
+    width : 100%;
+    max-width: 400px;
+}
+
+/* Alignment for recommended movies */
+.recommended-movie{
+    box-shadow: 0px 8px 12px 4px rgba(255, 255, 255, 0.8);
+    border: 2px solid #ffffff;
+    margin: 20px 20px 3px;
+    text-align: center;
+}
+
+.scrollable-text{
+    box-shadow: 0px 8px 15px 4px rgba(255, 255, 255, 0.8);
+    margin: 3px 20px 25px;
+    background: #ffffff;
+    padding-top: 1px;
+    height: 110px;
+    /*max-height: 58px;
+    overflow-y: auto;
+    white-space: nowrap;*/
+}
+
+.movie-text{
+    padding: 5px;
+    text-align: center;
+    color: #000000;
+}
+
+.movie-poster {
+    width: 100%;
+    max-width: 250px;
+}
+
+.movie-name{
+    font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin-top : 12px;
+    font-size : 19px;
+}
+
+#overview{
+    text-indent: 2em;
+}
+
+/* Style the search bar */
+.stSelectbox {
+    text-align: center;
+    margin-top: 85px;
+}
+
+.stSelectbox > div {
+    display: flex;
+    justify-content: center;
+}
+
+.stSelectbox > div > div {
+    width: 50%;
+    background-color: transparent;
+    color: white;
+    border: 2px solid #e50914;
+    border-radius: 5px;
+}
+
+/* Style the button */
+.stButton {
+    text-align: center;
+}
+
+div.stButton > button {
+    background-color: #e50914;
+    color: white;
+    border: 1px solid white;
+    padding: 12px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+.movie_font_details{
+    text-shadow: #000000 0px 0px 13px;
+}
+
+.cast-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.cast-info div {
+    max-width: 600px.
+}
+
+.cast-photo{
+    width: 100%;
+    height: auto;
+}
+.cast-details h3 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.cast-member{
+    box-shadow: 0px 8px 15px 4px rgba(255, 255, 255, 0.8);
+    margin: 10px 20px;
+}
+
+.recommend{
+    font-size: 18px;
+    text-align : center;
+    text-shadow: #000000 0px 0px 13px;
+}
+
+.footer{
+    font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    text-align: center;
+    margin-top: 20px;
+}
