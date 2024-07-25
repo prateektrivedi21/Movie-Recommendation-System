@@ -141,7 +141,7 @@ div.stButton > button {
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.expander-content {
+.expander-content p, .expander-content h3{
     color: #ffffff; 
 }
 .cast-member{
