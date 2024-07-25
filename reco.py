@@ -168,11 +168,10 @@ if st.button('Recommend'):
         @media (max-width: 768px) {
             .recommended-movie, .cast-member, .selected-movie-poster{
                 margin: 10px;
-                padding: 10px;
             }
-            .cast-photo, .movie-poster, .scrollable-text {
-                max-width: 100px;
-                height: auto;
+            .cast-photo, .movie-poster {
+                max-width: 100px.
+                height: auto.
             }
         }
 
@@ -186,14 +185,11 @@ if st.button('Recommend'):
             .movie_font_details {
                 font-size: 16px;
             }
-            .t-header{
-                font-size: 20px;
-            } 
-            .subheader {
+            .t-header, .subheader {
                 font-size: 18px;
             }
             .cast-info div {
-                max-width: 100%;
+                max-width: 100%.
             }
         }
         </style>
