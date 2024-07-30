@@ -281,7 +281,7 @@ if st.button('Recommend'):
                 </div>
                 <div class='scrollable-text' title='{recommended_movie_names[idx]}'>
                  <h5 class='movie-text'>{recommended_movie_names[idx]}<br></h5>
-                 <h4 class='movie-text'>Released on: {datetime.strptime(recommended_movie_release_dates[idx], '%Y-%m-%d').strftime('%b %d, %Y')})</h4>
+                 <h6 class='movie-text'>Released on: {datetime.strptime(recommended_movie_release_dates[idx], '%Y-%m-%d').strftime('%b %d, %Y')}</h6>
                 </div>
                 """,
                 unsafe_allow_html=True
