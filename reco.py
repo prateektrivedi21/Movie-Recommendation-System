@@ -267,13 +267,13 @@ if st.button('Recommend'):
     num_recommendations = len(recommended_movie_names)
     num_columns = 5  # Number of columns in the layout
     cols = st.columns(num_columns)
-
+    release_date_formatted = datetime.strptime(recommended_movie_release_dates[idx], '%Y-%m-%d').strftime('%b %d, %Y')
     for idx in range(num_recommendations):
         with cols[idx % num_columns]:
             st.markdown(
                 f"""
                 <div class='recommended-movie'>
-                    <a href="https://www.themoviedb.org/movie/{recommended_movie_ids[idx]}" target="_blank">
+                    <a href="https://www.themoviedb.org/movie/{datetime.strptime(recommended_movie_release_dates[idx], '%Y-%m-%d').strftime('%b %d, %Y')}" target="_blank">
                         <img src='{recommended_movie_posters[idx]}' class='movie-poster'/>
                     </a>
                 </div>
