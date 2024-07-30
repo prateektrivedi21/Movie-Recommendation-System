@@ -50,6 +50,7 @@ h1, h2, h3, h4, h5, h6{
 }
 
 .movie-text{
+    padding: 5px;
     text-align: center;
     color: #000000;
 }
