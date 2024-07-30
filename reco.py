@@ -272,12 +272,12 @@ if st.button('Recommend'):
             st.markdown(
                 f"""
                 <div class='recommended-movie'>
-                    <a href="https://www.themoviedb.org/movie/{datetime.strptime(recommended_movie_release_dates[idx], '%Y-%m-%d').strftime('%b %d, %Y')}" target="_blank">
+                    <a href="https://www.themoviedb.org/movie/{recommended_movie_ids[idx]}" target="_blank">
                         <img src='{recommended_movie_posters[idx]}' class='movie-poster'/>
                     </a>
                 </div>
                 <div class='scrollable-text' title='{recommended_movie_names[idx]}'>
-                 <h5 class='movie-text'>{recommended_movie_names[idx]}<br>({recommended_movie_release_dates[idx]})</h5>
+                 <h5 class='movie-text'>{recommended_movie_names[idx]}<br>({datetime.strptime(recommended_movie_release_dates[idx], '%Y-%m-%d').strftime('%b %d, %Y')})</h5>
                 </div>
                 """,
                 unsafe_allow_html=True
