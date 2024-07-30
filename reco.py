@@ -155,7 +155,7 @@ if st.button('Recommend'):
             transition: transform 0.2s;
         }
         .cast-text:hover{
-            color: #49398FF;
+            color: #D3D3D3;
         }
         .cast-photo:hover{
             transform: scale(1.2);
