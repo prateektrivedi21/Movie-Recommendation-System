@@ -60,8 +60,8 @@ def cast_member_html(cast):
     <div class='cast-member'>
         <img src='{cast["profile_path"]}' class='cast-photo'/>
         <div class='cast-details'>
-            <h3 class='cast-text' title='{cast["character"]}'>
-                {cast["character"]}
+            <h3 class='cast-text' title='{cast["name"]}'>
+                {cast["name"]}
             </h3>
         </div>
     </div>
@@ -244,7 +244,7 @@ if st.button('Recommend'):
                 }),
                 unsafe_allow_html=True
             )
-            with st.expander(cast['name']):
+            with st.expander(cast['character']):
                 cast_info = fetch_cast_details(cast['id'])
                 st.markdown(
                     f"""
