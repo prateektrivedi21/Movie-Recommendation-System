@@ -4,12 +4,13 @@ import requests
 import pandas as pd
 import base64
 from datetime import datetime
+import time
 
 def fetch_poster(movie_id):
     url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key=31b4d2af5d76969f2c5824937e980e38&language=en-US"
     data = requests.get(url).json()
     poster_path = data.get('poster_path')
-    if (poster_path):
+    if poster_path:
         full_path = "https://image.tmdb.org/t/p/w500/" + poster_path
     else:
         full_path = "https://via.placeholder.com/500x750?text=No+Image"
@@ -35,7 +36,7 @@ def fetch_movie_cast(movie_id):
             'profile_path': member['profile_path'],
             'id': member['id']  # Add cast member ID
         })
-
+        
     director = next((member['name'] for member in crew if member['job'] == 'Director'), 'N/A')
     return cast_details, director
 
@@ -91,6 +92,7 @@ def add_bg_from_local(image_file):
         unsafe_allow_html=True
     )
 
+
 # Adding Font Awesome CSS for icons
 st.markdown(
     """
@@ -136,157 +138,187 @@ def recommend(movie):
 
 
 if st.button('Recommend'):
-    add_bg_from_local('images/image.jpg')  # Change the background image upon recommendation
-    st.markdown(
+    gif_placeholder = st.empty()
+    gif_placeholder.markdown(
         """
+        <div class='full-screen-gif'>
+            <img src='data:image/gif;base64,{}' alt='loading' />
+        </div>
         <style>
-        .header {
-            color:transparent;
-        }
-        .stSelectbox > div > div {
-            width: 50%;
-            background-color: transparent;
-            color: white;
-            border: 2px solid #ffffff;
-            border-radius: 5px;
-        }
-        .recommended-movie:hover img{ 
-            transform: scale(1.2);
-            transition: transform 0.2s;
-        }
-        .cast-text:hover{
-            color: #D3D3D3;
-        }
-        .cast-photo:hover{
-            transform: scale(1.2);
-            transition: transform 0.2s;
-            -webkit-box-shadow: 0px 1px 15px 4px rgba(250,250,250,1);
-            -moz-box-shadow: 0px 1px 15px 4px rgba(250,250,250,1);
-            box-shadow: 0px 1px 15px 4px rgba(250,250,250,1); 
-        }
-        .t-header:hover, .subheader:hover, .recommend:hover, p:hover, .expander-content:hover h3{
-            color : #FFAE42;
-        }
-
-        @media (max-width: 768px) {
-            .recommended-movie, .cast-member, .selected-movie-poster{
-                margin: 10px;
-            }
-            .cast-photo, .movie-poster {
-                max-width: 100px.
-                height: auto.
-            }
-        }
-
-        @media (max-width: 480px) {
-            .stSelectbox > div > div {
-                width: 90%;
-            }
-            .movie_font_details {
-                font-size: 16px;
-            }
-            .subheader, #top-name, .expander-content {
-                font-size: 26px;
-            }
-            .recommend{
-                font-size: 18px;
-            }
-            .cast-info div {
-                max-width: 100%.
-            }
-        }
+        .full-screen-gif {{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.24); /* Semi-transparent background */
+            z-index: 9999;
+        }}
+        .full-screen-gif img {{
+            max-width: 100%;
+            max-height: 100%;
+        }}
         </style>
-        """,
-        unsafe_allow_html=True
+        """.format(base64.b64encode(open("images/Chart-run-cy.gif", "rb").read()).decode()), unsafe_allow_html=True
     )
-    movie_id = movies[movies['title'] == selected_movie].iloc[0].movie_id
-    movie_details = fetch_movie_details(movie_id)
-    cast_details, director = fetch_movie_cast(movie_id)
 
-    st.markdown(f"<h1 class='movie_font_details' id='top-name'>{movie_details['title']}</h1>",
-                unsafe_allow_html=True)
-    col1, col2 = st.columns([1, 4], gap="medium")
-    with col1:
+    with st.spinner('Processing...'):
+        add_bg_from_local('images/image.jpg')  # Change the background image upon recommendation
+        time.sleep(2)  # Simulating a delay for demonstration purposes
         st.markdown(
-            f"""
-            <a href="https://www.themoviedb.org/movie/{movie_id}" target="_blank">
-                <img src='{fetch_poster(movie_id)}' class='selected-movie-poster'/>
-            </a>
+            """
+            <style>
+            .header {
+                color:transparent;
+            }
+            .stSelectbox > div > div {
+                width: 50%;
+                background-color: transparent;
+                color: white;
+                border: 2px solid #ffffff;
+                border-radius: 5px;
+            }
+            .recommended-movie:hover img{ 
+                transform: scale(1.2);
+                transition: transform 0.2s;
+            }
+            .cast-text:hover{
+                color: #D3D3D3;
+            }
+            .cast-photo:hover{
+                transform: scale(1.2);
+                transition: transform 0.2s;
+                -webkit-box-shadow: 0px 1px 15px 4px rgba(250,250,250,1);
+                -moz-box-shadow: 0px 1px 15px 4px rgba(250,250,250,1);
+                box-shadow: 0px 1px 15px 4px rgba(250,250,250,1); 
+            }
+            .t-header:hover, .subheader:hover, .recommend:hover, p:hover, .expander-content:hover h3{
+                color : #FFAE42;
+            }
+
+            @media (max-width: 768px) {
+                .recommended-movie, .cast-member, .selected-movie-poster{
+                    margin: 10px;
+                }
+                .cast-photo, .movie-poster {
+                    max-width: 100px.
+                    height: auto.
+                }
+            }
+
+            @media (max-width: 480px) {
+                .stSelectbox > div > div {
+                    width: 90%;
+                }
+                .movie_font_details {
+                    font-size: 16px;
+                }
+                .subheader, #top-name, .expander-content {
+                    font-size: 26px;
+                }
+                .recommend{
+                    font-size: 18px;
+                }
+                .cast-info div {
+                    max-width: 100%.
+                }
+            }
+            </style>
             """,
             unsafe_allow_html=True
         )
-    with col2:
-        genres = ", ".join([genre['name'] for genre in movie_details['genres']])
-        rating_formatted = f"{movie_details['vote_average']}/10 ({movie_details['vote_count']} votes)"
-        release_date_formatted = datetime.strptime(movie_details['release_date'], '%Y-%m-%d').strftime('%b %d, %Y')
 
-        st.markdown(f"<p class='movie_font_details'><b>Title:</b> {movie_details['title']}</p>", unsafe_allow_html=True)
-        st.markdown(f"<p class='movie_font_details'><b>Overview:</b><p id='overview'>{movie_details['overview']}</p>", unsafe_allow_html=True)
-        st.markdown(f"<p class='movie_font_details'><b>Release Date:</b> {release_date_formatted}</p>",unsafe_allow_html=True)
-        st.markdown(f"<p class='movie_font_details'><b>Director:</b> {director}</p>", unsafe_allow_html=True)
-        st.markdown(f"<p class='movie_font_details'><b>Runtime:</b> {movie_details['runtime']} minutes</p>",unsafe_allow_html=True)
-        st.markdown(f"<p class='movie_font_details'><b>Genre:</b> {genres}</p>", unsafe_allow_html=True)
-        st.markdown(f"<p class='movie_font_details'><b>Rating:</b> {rating_formatted}</p>", unsafe_allow_html=True)
-        st.markdown(f"<p class='movie_font_details'><b>Status:</b> {movie_details['status']}</p>",unsafe_allow_html=True)
+        movie_id = movies[movies['title'] == selected_movie].iloc[0].movie_id
+        movie_details = fetch_movie_details(movie_id)
+        cast_details, director = fetch_movie_cast(movie_id)
 
-    st.markdown('<h1 class="subheader">Top Cast of the Movie</h1>', unsafe_allow_html=True)
-    st.markdown('<p class="recommend">(Expand to uncover hidden gems about your favorite stars!)</p>',unsafe_allow_html=True)
-    num_col = 5
-    cast_cols = st.columns(num_col)
-    placeholder_image_url = "https://via.placeholder.com/500x750?text=No+Image"
-    for idx, cast in enumerate(cast_details):  # Access cast details correctly
-        with cast_cols[idx % num_col]:
-            profile_image_url = placeholder_image_url
-            if cast['profile_path']:
-                profile_image_url = "https://image.tmdb.org/t/p/w500/" + cast['profile_path']
+        st.markdown(f"<h1 class='t-header'>{movie_details['title']}</h1>",
+                    unsafe_allow_html=True)
+        col1, col2 = st.columns([1, 4], gap="medium")
+        with col1:
             st.markdown(
-                cast_member_html({
-                    "profile_path": profile_image_url,
-                    "name": cast['name'],
-                    "character": cast['character']
-                }),
+                f"""
+                <a href="https://www.themoviedb.org/movie/{movie_id}" target="_blank">
+                    <img src='{fetch_poster(movie_id)}' class='selected-movie-poster'/>
+                </a>
+                """,
                 unsafe_allow_html=True
             )
-            with st.expander(cast['character']):
-                cast_info = fetch_cast_details(cast['id'])
+        with col2:
+            genres = ", ".join([genre['name'] for genre in movie_details['genres']])
+            rating_formatted = f"{movie_details['vote_average']}/10 ({movie_details['vote_count']} votes)"
+            release_date_formatted = datetime.strptime(movie_details['release_date'], '%Y-%m-%d').strftime('%b %d, %Y')
+
+            st.markdown(f"<p class='movie_font_details'><b>Title:</b> {movie_details['title']}</p>",unsafe_allow_html=True)
+            st.markdown(f"<p class='movie_font_details'><b>Overview:</b><p id='overview'>{movie_details['overview']}</p>",unsafe_allow_html=True)
+            st.markdown(f"<p class='movie_font_details'><b>Release Date:</b> {release_date_formatted}</p>",unsafe_allow_html=True)
+            st.markdown(f"<p class='movie_font_details'><b>Director:</b> {director}</p>", unsafe_allow_html=True)
+            st.markdown(f"<p class='movie_font_details'><b>Runtime:</b> {movie_details['runtime']} minutes</p>",unsafe_allow_html=True)
+            st.markdown(f"<p class='movie_font_details'><b>Genre:</b> {genres}</p>", unsafe_allow_html=True)
+            st.markdown(f"<p class='movie_font_details'><b>Rating:</b> {rating_formatted}</p>", unsafe_allow_html=True)
+            st.markdown(f"<p class='movie_font_details'><b>Status:</b> {movie_details['status']}</p>",unsafe_allow_html=True)
+
+        st.markdown('<h1 class="subheader">Top Cast of the Movie</h1>', unsafe_allow_html=True)
+        st.markdown('<p class="recommend">(Expand to uncover hidden gems about your favorite stars!)</p>',unsafe_allow_html=True)
+        num_col = 5
+        cast_cols = st.columns(num_col)
+        placeholder_image_url = "https://via.placeholder.com/500x750?text=No+Image"
+        for idx, cast in enumerate(cast_details):
+            with cast_cols[idx % num_col]:
+                profile_image_url = placeholder_image_url if not cast['profile_path'] else \
+                    "https://image.tmdb.org/t/p/w500/" + cast['profile_path']
+                st.markdown(
+                    cast_member_html({
+                        "profile_path": profile_image_url,
+                        "name": cast['name'],
+                        "character": cast['character']
+                    }),
+                    unsafe_allow_html=True
+                )
+                with st.expander(cast['character']):
+                    cast_info = fetch_cast_details(cast['id'])
+                    st.markdown(
+                        f"""
+                        <div class='cast-info expander-content'>
+                            <div>
+                                <h3>{cast_info['name']}</h3>
+                                <p><b>Birthday:</b> {datetime.strptime(cast_info['birthday'], '%Y-%m-%d').strftime('%b %d, %Y')}</p>
+                                <p><b>Place of Birth:</b> {cast_info['place_of_birth']}</p>
+                                <p><b>Biography:</b> {cast_info['biography']}</p>
+                            </div>
+                        </div>
+                        """,
+                        unsafe_allow_html=True
+                    )
+
+        st.markdown('<h1 class="subheader">Top Recommended Movies for a Cozy Night In</h1>', unsafe_allow_html=True)
+        st.markdown('<p class="recommend">(Discover more by clicking on your selected movie!)</p>', unsafe_allow_html=True)
+        recommended_movie_names, recommended_movie_posters, recommended_movie_ids, recommended_movie_release_dates = recommend(selected_movie)
+
+        num_recommendations = len(recommended_movie_names)
+        num_columns = 5  # Number of columns in the layout
+        cols = st.columns(num_columns)
+
+        for idx in range(num_recommendations):
+            with cols[idx % num_columns]:
                 st.markdown(
                     f"""
-                    <div class='cast-info expander-content'>
-                        <div>
-                            <h3>{cast_info['name']}</h3>
-                            <p><b>Birthday:</b> {cast_info['birthday']}</p>
-                            <p><b>Place of Birth:</b> {cast_info['place_of_birth']}</p>
-                            <p><b>Biography:</b> {cast_info['biography']}</p>
-                        </div>
+                    <div class='recommended-movie'>
+                        <a href="https://www.themoviedb.org/movie/{recommended_movie_ids[idx]}" target="_blank">
+                            <img src='{recommended_movie_posters[idx]}' class='movie-poster'/>
+                        </a>
+                    </div>
+                    <div class='scrollable-text' title='{recommended_movie_names[idx]}'>
+                     <h5 class='movie-text'>{recommended_movie_names[idx]}<br>({datetime.strptime(recommended_movie_release_dates[idx], '%Y-%m-%d').strftime('%b %d, %Y')})</h5>
                     </div>
                     """,
                     unsafe_allow_html=True
                 )
+    gif_placeholder.empty()  # Remove the GIF after processing is done
 
-    st.markdown('<h1 class="subheader">Top Recommended Movies for a Cozy Night In</h1>', unsafe_allow_html=True)
-    st.markdown('<p class="recommend">(Discover more by clicking on your selected movie!)</p>', unsafe_allow_html=True)
-    recommended_movie_names, recommended_movie_posters, recommended_movie_ids, recommended_movie_release_dates = recommend(selected_movie)
-
-    num_recommendations = len(recommended_movie_names)
-    num_columns = 5  # Number of columns in the layout
-    cols = st.columns(num_columns)
-    for idx in range(num_recommendations):
-        with cols[idx % num_columns]:
-            st.markdown(
-                f"""
-                <div class='recommended-movie'>
-                    <a href="https://www.themoviedb.org/movie/{recommended_movie_ids[idx]}" target="_blank">
-                        <img src='{recommended_movie_posters[idx]}' class='movie-poster'/>
-                    </a>
-                </div>
-                <div class='scrollable-text' title='{recommended_movie_names[idx]}'>
-                 <h5 class='movie-text'>{recommended_movie_names[idx]}<br>({datetime.strptime(recommended_movie_release_dates[idx], '%Y-%m-%d').strftime('%b %d, %Y')})</h5>
-                </div>
-                """,
-                unsafe_allow_html=True
-            )
-
-# Added copyright notice as a footer
 st.markdown(
     """
     <footer class='footer'>
