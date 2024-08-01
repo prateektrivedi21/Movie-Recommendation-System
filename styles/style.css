@@ -66,6 +66,10 @@ h1, h2, h3, h4, h5, h6{
     font-size : 19px;
 }
 
+.t-header{
+    color:#ffffff;
+}
+
 #overview{
     text-indent: 2em;
 }
