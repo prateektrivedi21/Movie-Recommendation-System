@@ -162,12 +162,12 @@ if st.button('Recommend'):
             max-height: 100%;
         }}
         </style>
-        """.format(base64.b64encode(open("images/Chart-run-cy.gif", "rb").read()).decode()), unsafe_allow_html=True
+        """.format(base64.b64encode(open("images/Chart-run-cy-ezgif.com-resize.gif", "rb").read()).decode()), unsafe_allow_html=True
     )
 
     with st.spinner('Processing...'):
+        add_bg_from_local('images/lav.jpeg')
         time.sleep(3)
-        add_bg_from_local('images/image.jpg')  # Change the background image upon recommendation
         st.markdown(
             """
             <style>
