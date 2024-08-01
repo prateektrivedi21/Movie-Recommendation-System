@@ -166,6 +166,7 @@ if st.button('Recommend'):
     )
 
     with st.spinner('Processing...'):
+        time.sleep(3)
         add_bg_from_local('images/image.jpg')  # Change the background image upon recommendation
         st.markdown(
             """
