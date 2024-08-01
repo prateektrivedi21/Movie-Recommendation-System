@@ -166,8 +166,8 @@ if st.button('Recommend'):
     )
 
     with st.spinner('Processing...'):
-        add_bg_from_local('images/lav.jpeg')
-        time.sleep(3)
+        add_bg_from_local('images/image.jpg')
+        time.sleep(2)
         st.markdown(
             """
             <style>
