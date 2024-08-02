@@ -93,7 +93,6 @@ def add_bg_from_local(image_file):
     )
 
 
-# Adding Font Awesome CSS for icons
 st.markdown(
     """
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -104,7 +103,6 @@ st.markdown(
 add_custom_css()
 add_bg_from_local('images/14.jpeg')
 
-# Adding the main header at the top of the page
 st.markdown('<h1 class="header">Movie Recommender System</h1>', unsafe_allow_html=True)
 movies_dict = pickle.load(open('assets/movie_dict.pkl', 'rb'))
 movies = pd.DataFrame(movies_dict)
@@ -154,7 +152,7 @@ if st.button('Recommend'):
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: rgba(0, 0, 0, 0.24); /* Semi-transparent background */
+            background-color: rgba(0, 0, 0, 0.8);
             z-index: 9999;
         }}
         .full-screen-gif img {{
