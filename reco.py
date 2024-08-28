@@ -127,8 +127,8 @@ def recommend(movie):
     return recommended_movie_names, recommended_movie_posters, recommended_movie_ids, recommended_movie_release_dates
 
 
-with st.spinner('Fetching movie recommendations...'):
-    if st.button('Recommend'):
+if st.button('Recommend'):
+    with st.spinner('Fetching movie recommendations...'):
         add_bg_from_local('images/image.jpg')
         st.markdown(
             """
