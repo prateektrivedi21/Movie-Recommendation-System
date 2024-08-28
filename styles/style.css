@@ -93,7 +93,10 @@ h1, h2, h3, h4, h5, h6{
     border-radius: 5px;
 }
 
-/* Style the button */
+.stSpinner{
+    color: #ffffff;
+}
+
 .stButton {
     text-align: center;
 }
@@ -146,7 +149,7 @@ div.stButton > button {
     text-overflow: ellipsis;
 }
 .expander-content p, .expander-content h3{
-    color: #ffffff; 
+    color: #ffffff;
 }
 .cast-member{
     box-shadow: 0px 8px 15px 4px rgba(255, 255, 255, 0.8);
