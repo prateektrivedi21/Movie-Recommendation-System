@@ -16,12 +16,10 @@ def fetch_poster(movie_id):
         full_path = "https://via.placeholder.com/500x750?text=No+Image"
     return full_path
 
-
 def fetch_movie_details(movie_id):
     url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key=31b4d2af5d76969f2c5824937e980e38&language=en-US"
     data = requests.get(url).json()
     return data
-
 
 def fetch_movie_cast(movie_id):
     url = f"https://api.themoviedb.org/3/movie/{movie_id}/credits?api_key=31b4d2af5d76969f2c5824937e980e38&language=en-US"
@@ -29,17 +27,16 @@ def fetch_movie_cast(movie_id):
     cast = data['cast']
     crew = data['crew']
     cast_details = []
-    for member in cast[:10]:  # Limit to top 10 cast members
+    for member in cast[:10]:
         cast_details.append({
             'name': member['name'],
-            'character': member['character'],  # Include character role
+            'character': member['character'],
             'profile_path': member['profile_path'],
-            'id': member['id']  # Add cast member ID
+            'id': member['id']
         })
-        
+
     director = next((member['name'] for member in crew if member['job'] == 'Director'), 'N/A')
     return cast_details, director
-
 
 def fetch_cast_details(cast_id):
     url = f"https://api.themoviedb.org/3/person/{cast_id}?api_key=31b4d2af5d76969f2c5824937e980e38&language=en-US"
@@ -55,7 +52,6 @@ def fetch_cast_details(cast_id):
         'profile_path': data.get('profile_path', None)
     }
 
-
 def cast_member_html(cast):
     return f"""
     <div class='cast-member'>
@@ -68,11 +64,9 @@ def cast_member_html(cast):
     </div>
     """
 
-
 def add_custom_css():
     with open("styles/style.css") as css_file:
         st.markdown(f"<style>{css_file.read()}</style>", unsafe_allow_html=True)
-
 
 def add_bg_from_local(image_file):
     with open(image_file, "rb") as image:
@@ -92,7 +86,6 @@ def add_bg_from_local(image_file):
         unsafe_allow_html=True
     )
 
-
 st.markdown(
     """
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -104,7 +97,7 @@ add_custom_css()
 add_bg_from_local('images/14.jpeg')
 
 st.markdown('<h1 class="header">Movie Recommender System</h1>', unsafe_allow_html=True)
-movies_dict = pickle.load(open('assets/movie_dict.pkl', 'rb'))
+movies_dict = pickle.load(open('movie_dict.pkl', 'rb'))
 movies = pd.DataFrame(movies_dict)
 similarity = pickle.load(open('similarity.pkl', 'rb'))
 movie_list = movies['title'].values
@@ -113,7 +106,6 @@ selected_movie = st.selectbox(
     "",
     movie_list
 )
-
 
 def recommend(movie):
     movie_index = movies[movies['title'] == movie].index[0]
@@ -127,7 +119,7 @@ def recommend(movie):
 
     for i in movies_list:
         movie_id = movies.iloc[i[0]].movie_id
-        movie_details = fetch_movie_details(movie_id)  # Fetch movie details to get the release date
+        movie_details = fetch_movie_details(movie_id)
         recommended_movie_posters.append(fetch_poster(movie_id))
         recommended_movie_names.append(movies.iloc[i[0]].title)
         recommended_movie_ids.append(movie_id)
@@ -135,37 +127,9 @@ def recommend(movie):
     return recommended_movie_names, recommended_movie_posters, recommended_movie_ids, recommended_movie_release_dates
 
 
-if st.button('Recommend'):
-    gif_placeholder = st.empty()
-    gif_placeholder.markdown(
-        """
-        <div class='full-screen-gif'>
-            <img src='data:image/gif;base64,{}' alt='loading' />
-        </div>
-        <style>
-        .full-screen-gif {{
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 9999;
-        }}
-        .full-screen-gif img {{
-            max-width: 100%;
-            max-height: 100%;
-        }}
-        </style>
-        """.format(base64.b64encode(open("images/Chart-run-cy-ezgif.com-resize.gif", "rb").read()).decode()), unsafe_allow_html=True
-    )
-
-    with st.spinner('Processing...'):
+with st.spinner('Fetching movie recommendations...'):
+    if st.button('Recommend'):
         add_bg_from_local('images/image.jpg')
-        time.sleep(2)
         st.markdown(
             """
             <style>
@@ -193,7 +157,7 @@ if st.button('Recommend'):
                 -moz-box-shadow: 0px 1px 15px 4px rgba(250,250,250,1);
                 box-shadow: 0px 1px 15px 4px rgba(250,250,250,1); 
             }
-            .t-header:hover, .subheader:hover, .recommend:hover, p:hover, .expander-content:hover h3{
+            .t-header:hover, .subheader:hover, .recommend:hover, p:hover, #overview:hover, .expander-content:hover h3{
                 color : #FFAE42;
             }
 
@@ -228,7 +192,6 @@ if st.button('Recommend'):
             """,
             unsafe_allow_html=True
         )
-
         movie_id = movies[movies['title'] == selected_movie].iloc[0].movie_id
         movie_details = fetch_movie_details(movie_id)
         cast_details, director = fetch_movie_cast(movie_id)
@@ -250,8 +213,8 @@ if st.button('Recommend'):
             rating_formatted = f"{movie_details['vote_average']}/10 ({movie_details['vote_count']} votes)"
             release_date_formatted = datetime.strptime(movie_details['release_date'], '%Y-%m-%d').strftime('%b %d, %Y')
 
-            st.markdown(f"<p class='movie_font_details'><b>Title:</b> {movie_details['title']}</p>",unsafe_allow_html=True)
-            st.markdown(f"<p class='movie_font_details'><b>Overview:</b><p id='overview'>{movie_details['overview']}</p>",unsafe_allow_html=True)
+            st.markdown(f"<p class='movie_font_details'><b>Title:</b> {movie_details['title']}</p>", unsafe_allow_html=True)
+            st.markdown(f"<p class='movie_font_details'><b>Overview:</b><p id='overview'>{movie_details['overview']}</p>", unsafe_allow_html=True)
             st.markdown(f"<p class='movie_font_details'><b>Release Date:</b> {release_date_formatted}</p>",unsafe_allow_html=True)
             st.markdown(f"<p class='movie_font_details'><b>Director:</b> {director}</p>", unsafe_allow_html=True)
             st.markdown(f"<p class='movie_font_details'><b>Runtime:</b> {movie_details['runtime']} minutes</p>",unsafe_allow_html=True)
@@ -266,8 +229,9 @@ if st.button('Recommend'):
         placeholder_image_url = "https://via.placeholder.com/500x750?text=No+Image"
         for idx, cast in enumerate(cast_details):
             with cast_cols[idx % num_col]:
-                profile_image_url = placeholder_image_url if not cast['profile_path'] else \
-                    "https://image.tmdb.org/t/p/w500/" + cast['profile_path']
+                profile_image_url = placeholder_image_url
+                if cast['profile_path']:
+                    profile_image_url = "https://image.tmdb.org/t/p/w500/" + cast['profile_path']
                 st.markdown(
                     cast_member_html({
                         "profile_path": profile_image_url,
@@ -278,12 +242,16 @@ if st.button('Recommend'):
                 )
                 with st.expander(cast['character']):
                     cast_info = fetch_cast_details(cast['id'])
+                    birthday_text = "N/A"
+                    if cast_info['birthday']:
+                        birthday_text = datetime.strptime(cast_info['birthday'], '%Y-%m-%d').strftime('%b %d, %Y')
+
                     st.markdown(
                         f"""
                         <div class='cast-info expander-content'>
                             <div>
                                 <h3>{cast_info['name']}</h3>
-                                <p><b>Birthday:</b> {datetime.strptime(cast_info['birthday'], '%Y-%m-%d').strftime('%b %d, %Y')}</p>
+                                <p><b>Birthday:</b> {birthday_text}</p>
                                 <p><b>Place of Birth:</b> {cast_info['place_of_birth']}</p>
                                 <p><b>Biography:</b> {cast_info['biography']}</p>
                             </div>
@@ -297,7 +265,7 @@ if st.button('Recommend'):
         recommended_movie_names, recommended_movie_posters, recommended_movie_ids, recommended_movie_release_dates = recommend(selected_movie)
 
         num_recommendations = len(recommended_movie_names)
-        num_columns = 5  # Number of columns in the layout
+        num_columns = 5
         cols = st.columns(num_columns)
 
         for idx in range(num_recommendations):
@@ -315,7 +283,6 @@ if st.button('Recommend'):
                     """,
                     unsafe_allow_html=True
                 )
-    gif_placeholder.empty()  # Remove the GIF after processing is done
 
 st.markdown(
     """
